@@ -1,8 +1,8 @@
 #This is a Miguel Ferreira production
 
-import random #this is an important, I hope you like him, 'cause he'll be helping the computer to choose a random string so the computer can play
+import random #this is an important thing, I hope you like him, 'cause he'll be helping the computer to choose a random string so the computer can play
 
-options = ['rock','paper','scissors'] #just a list, where the computer can check is choice
+options = ['rock','paper','scissors'] #just a list, where the computer can check its choice
 
 
 # ==== Game function ==== #
