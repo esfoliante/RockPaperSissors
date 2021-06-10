@@ -9,21 +9,30 @@ options = ['rock','paper','scissors'] #just a list, where the computer can check
 
 def check_winner(player, computer): #this is a kind thing called "function" and it will recieve 2 values --> the player choice and the computer choice
 	#in this line below me (yes, I'm the comment) we set this variable as false, so we can return them anyways
-	win = False
+	# 0 = lose, 1 = win, 2 = draw
+	win = 0
+
+	if(player == computer):
+		win = 2
+
 
 	#this following lines are just the game logic with some if's in the middle (as you can see, there's no cheating in this game) 
 	if player == "rock":
 		if computer == "scissors":
-			win = True
+			win = 1
 	elif player == "paper":
 		if computer == "rock":
-			win = True
+			win = 1
 	else: #this can just be scissors, as we did the validation before
 		if computer == "paper":
-			win = True
+			win = 1
 
 	#see, we return them here
 	return win
+
+def validate_players_choice(player):
+	return "y" if player in options else "n"
+
 
 # ====================== #
 
@@ -31,67 +40,20 @@ def check_winner(player, computer): #this is a kind thing called "function" and 
 
 print("=== Rock, paper, scissors... ===\n")
 
-player = str(input("Rock, paper, scissors...? » ")).lower() #here we put .lower() so we can transform "RoCk" in just "rock"
 
-if player in options: #in this cute and tiny line, we'll check if the... well... thing that the player chose is in the array (check the final of the code for more)
-	computer = random.choice(options) #select the computer choice randomly
+while True:
+	player = str(input("Rock, paper, scissors...? » ")).lower()
+	if(validate_players_choice(player) != "y"):
+		continue
 
-	#print(computer) #just for debbuging pourposes, you can delete it later
+	computer = random.choice(options)
 
-	if player == computer:
-		print("\n=== Draw ====")
+	#LOSE CONDITION
+	if(check_winner(player, computer) == 0):
+		print("\n==== You lost :( try again!! ====\n")
+	#WIN CONDITION
+	elif(check_winner(player, computer) == 1):
+			print("\n==== You won the computer!! ====\n")
+	#DRAW CONDITION
 	else:
-		check_winner(player, computer)
-		if check_winner(player, computer): #check the end of the code, again...
-			#Player wins!!!!
-			print("\n==== You won the computer!! ====")
-		else:
-			#Well, the computer wass lucky -_-
-			print("\n==== You lost :( try again!! ====")
-else:
-	while player not in options:
-		player = str(input("Rock, paper, scissors...? » ")).lower() #here we put .lower() so we can transform "RoCk" in just "rock"
-
-		if player in options: #in this cute and tiny line, we'll check if the... well... thing that the player chose is in the array (check the final of the code for more)
-			computer = random.choice(options) #select the computer choice randomly
-
-			if player == computer:
-				print("\n==== Draw ====")
-			else:
-				check_winner(player, computer)
-				if check_winner(player, computer): #check the end of the code, again...
-					#Player wins!!!!
-					print("\n==== You won the computer!! ====")
-				else:
-					#Well, the computer wass lucky -_-
-					print("\n==== You lost :( try again!! ====")
-
-
-'''
-
-if player in options:
-	print("Stuff")
-
-is kinda the same thing as:
-
-
-if player == "rock" or player == ""paper" or player == "scissors":
-	print("Stuff")
-
-but we need to use everything the language gives us
-
-
--------------------------------------------------------------------
-
-if check_winner(player, computer):
-	{condition}
-
-is the same as:
-
-if check_winner(player, computer) == True:
-	{condition} ---> in this case, the player would win
-
-
-'''
-
-
+		print("\n=== DRAW ===\n")
